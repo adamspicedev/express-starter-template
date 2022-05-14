@@ -5,6 +5,7 @@ import validationMiddleware from '@/middleware/validation.middleware';
 import validate from '@/resources/post/post.validation';
 import Post from '@/resources/post/post.interface';
 import PostService from '@/resources/post/post.service';
+import authenticatedMiddleware from '@/middleware/authenticated.middleware';
 
 class PostController implements Controller {
   public path = '/posts';
@@ -21,6 +22,7 @@ class PostController implements Controller {
     this.router.post(
       `${this.path}`,
       validationMiddleware(validate.create),
+      authenticatedMiddleware(),
       this.create
     );
     // this.router.put(
